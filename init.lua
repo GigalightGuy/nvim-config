@@ -680,3 +680,11 @@ cmp.setup {
 -- vim: ts=2 sts=2 sw=2 et
 
 vim.keymap.set("n", "<F3>", vim.lsp.buf.format)
+vim.keymap.set("n", "<Leader>o", "<cmd>ClangdSwitchSourceHeader<cr>")
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = {"*.h", "*.hpp", "*.c", "*.cpp"},
+  callback = function(_)
+    vim.lsp.buf.format()
+  end
+})
